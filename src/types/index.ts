@@ -15,7 +15,7 @@ export interface ImageFile {
     file: File;
     preview: string;
     metadata: ExifData | null;
-    status: 'pending' | 'processing' | 'done' | 'error';
+    status: 'idle' | 'pending' | 'processing' | 'done' | 'error';
     cleanBlob?: Blob;
     error?: string;
 }
