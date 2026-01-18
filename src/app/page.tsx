@@ -98,6 +98,10 @@ export default function Home() {
                     </div>
 
                 </div>
+
+                <footer className="text-center text-sm text-muted-foreground pt-8 border-t">
+                    <p>Made with respect by <a href="https://github.com/akunumanarif" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">numanarif</a></p>
+                </footer>
             </div>
         </main>
     );
