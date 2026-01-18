@@ -25,8 +25,8 @@ export default function Home() {
     const selectedFile = files.find(f => f.id === selectedFileId);
 
     return (
-        <main className="min-h-screen bg-background p-4 md:p-8 font-sans text-foreground">
-            <div className="max-w-6xl mx-auto space-y-8">
+        <main className="min-h-screen bg-background font-sans text-foreground flex flex-col">
+            <div className="flex-1 w-full max-w-6xl mx-auto p-4 md:p-8 space-y-8 flex flex-col">
 
                 {/* Header */}
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b pb-6">
@@ -50,7 +50,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 flex-1">
 
                     {/* Left Column: Input and List */}
                     <div className="lg:col-span-4 space-y-4">
@@ -100,7 +100,7 @@ export default function Home() {
                 </div>
 
                 <footer className="text-center text-sm text-muted-foreground pt-8 border-t">
-                    <p>Made with respect by <a href="https://github.com/akunumanarif" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">numanarif</a></p>
+                    <p>Made with respect by <a href="https://numanarif.dev" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">numanarif</a></p>
                 </footer>
             </div>
         </main>
