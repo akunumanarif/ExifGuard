@@ -17,6 +17,31 @@ interface MetadataViewerProps {
 }
 
 export function MetadataViewer({ data }: MetadataViewerProps) {
+    const [address, setAddress] = React.useState<string | null>(null);
+    const [loadingAddress, setLoadingAddress] = React.useState(false);
+
+    React.useEffect(() => {
+        if (data.hasGps && data.latitude && data.longitude) {
+            setLoadingAddress(true);
+            setAddress(null);
+
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${data.latitude}&lon=${data.longitude}`)
+                .then(res => res.json())
+                .then(result => {
+                    if (result.display_name) {
+                        setAddress(result.display_name);
+                    } else {
+                        setAddress('Address not found');
+                    }
+                })
+                .catch(err => {
+                    console.error("Failed to geocode:", err);
+                    setAddress('Failed to load address');
+                })
+                .finally(() => setLoadingAddress(false));
+        }
+    }, [data.hasGps, data.latitude, data.longitude]);
+
     if (!data) return null;
 
     return (
@@ -56,6 +81,17 @@ export function MetadataViewer({ data }: MetadataViewerProps) {
                             <p className="text-xs text-muted-foreground">
                                 Lat: {data.latitude.toFixed(6)}, Lng: {data.longitude.toFixed(6)}
                             </p>
+
+                            {/* Address Display */}
+                            <div className="text-sm bg-muted/50 p-2 rounded">
+                                <div className="flex items-start gap-1">
+                                    <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
+                                    <span>
+                                        {loadingAddress ? 'Resolving address...' : (address || 'Address unavailable')}
+                                    </span>
+                                </div>
+                            </div>
+
                             <MapView lat={data.latitude} lng={data.longitude} />
                         </div>
                     ) : (
